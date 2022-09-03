@@ -9,13 +9,14 @@
     "test": "mocha"
   },
   "type": "module",
-  "author": "Betram Lalusha, Berke Matthew Voskericyan",
+  "author": "Betram Lalusha, Berke Matthew Voskericyan, Clayton Bruce, Dylan Lim",
   "license": "MIT",
   "description": "A JavaScript project for CMSI 3801 homework",
   "devDependencies": {
     "mocha": "^10.0.0"
   },
   "dependencies": {
+    "deep-equal": "^2.0.5",
     "node-fetch": "^3.2.10"
   }
 }
