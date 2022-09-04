@@ -37,7 +37,7 @@ describe("The stretched function", () => {
     deepEqual(stretched(""), "")
     deepEqual(stretched("dog house"), "dooggghhhhooooouuuuuussssssseeeeeeee")
     deepEqual(stretched("a        π§"), "aππ§§§")
-    //deepEqual(stretched("😄🤗 💀"), "😄🤗🤗💀💀💀")
+    deepEqual(stretched("😄🤗 💀"), "😄🤗🤗💀💀💀")
   })
 })
 
