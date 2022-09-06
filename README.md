@@ -2,7 +2,7 @@
 
 *AUTHORS
 
-Betram Lalusha
-Berke Matthew Voskericyan
-Clayton Bruce
+Betram Lalusha,
+Berke Matthew Voskericyan,
+Clayton Bruce,
 Dylan Lim
