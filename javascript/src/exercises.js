@@ -1,14 +1,20 @@
 
-const emojiRegex = /\p{Emoji}/u;
-var currentPhrase = "";
 
+/**
+ * Function takes a strength an repeats each character n number of times where
+ * n is the posistion of the character in the string 1-indexed.
+ * @param {*} string: the string to stretch
+ * @returns : the orginal string with the i-th character repeated i times
+ */
 export function stretched(string) {
 	var stretchedString = "";
 	var stringWithoutSpace = string.replace(/ /g, ''); //code adopted from https://stackoverflow.com/questions/6623231/remove-all-white-spaces-from-text
 	var stringArray = string.split(" ");
-	for (var i = 1; i <= stringWithoutSpace.length; i++) {
-		stretchedString += stretch(stringWithoutSpace.charAt(i - 1), i);
+	var arr = Array.from(stringWithoutSpace);
+	for (let i = 1; i <= arr.length; i++) {
+		stretchedString += arr[i - 1].repeat(i);
 	}
+
 	return stretchedString;
 }
 
@@ -52,35 +58,5 @@ export class Quaternion {
 
 }
 
-// console.log(stretched("dog house"))
-// console.log(stretched("😄🤗 💀"));
 
-// console.log(say("hi")("there")())
-// console.log(say())
-
-
-
-
-
-
-
-
-/****** HELPER FUNCTIONS***/
-
-/*
-Stretches a given letter by numberOfTimes
-@letter: the letter to stretch
-@numberOfTimes: the number of times to stretch the letter by
-*/
-function stretch(letter, numberOfTimes) {
-
-	var result = letter;
-	let originalLetter = letter;
-	for (var i = 1; i < numberOfTimes; i++) {
-		//console.log("code point " + emojiRegex.test(originalLetter));
-		result += originalLetter;
-	}
-
-	return result;
-}
-
+stretched("😄🤗💀")
