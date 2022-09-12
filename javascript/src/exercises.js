@@ -59,8 +59,14 @@ export function say(phrase) {
 export function powers(base, limit, p) {
 	var exponent = Math.log(Math.abs(limit))/ Math.log(Math.abs(base));
     exponent = Math.floor(exponent);
-    for (let i = 0; i <= exponent; i++) {
+    for (let i = 0; i <= (exponent); i++) {
         p(Math.pow(base, i));
+	}
+	if (base < 0){
+		if (Math.pow(base, exponent) > 0){
+		exponent++;
+		p(Math.pow(base, exponent));
+		}
 	}
 }
 
