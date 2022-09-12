@@ -18,7 +18,29 @@ export function stretched(string) {
 	return stretchedString;
 }
 
-export function change() {
+export function change(amount) {
+	if (amount < 0) {
+		throw new RangeError("must be a positive value");
+	}
+	var coinvalue = [25, 10, 5, 1];
+	var changeamount = [0, 0, 0, 0];
+	var amountleft = amount;
+	if (amount == 0) {
+		return changeamount;
+	}
+
+	while (amountleft > 0) {
+		changeamount[0] = Math.floor(amount / coinvalue[0]);
+        amountleft = amountleft - (coinvalue[0] * changeamount[0]);
+        changeamount[1] = Math.floor(amountleft / coinvalue[1]);
+        amountleft = amountleft - (coinvalue[1] * changeamount[1]);
+        changeamount[2] = Math.floor(amountleft / coinvalue[2]);
+		amountleft = amountleft - (coinvalue[2] * changeamount[2]);
+		changeamount[3] = amountleft;
+        amountleft = amountleft - changeamount[3];
+	}
+
+	return changeamount;
 
 }
 
@@ -34,8 +56,12 @@ export function say(phrase) {
 		return newPhrase === undefined ? phrase : say(phrase + " " + newPhrase);
 	}
 }
-export function powers() {
-
+export function powers(base, limit, p) {
+	var exponent = Math.log(limit) / Math.log(base);
+    Math.round(exponent);
+    for (let i = 0; i <= exponent; i++) {
+        p(Math.pow(base, i));
+	}
 }
 
 export function powersGenerator() {
