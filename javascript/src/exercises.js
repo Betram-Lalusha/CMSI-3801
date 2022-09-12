@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { createCipheriv, createDecipheriv } from "crypto";
 
 /**
  * Function takes a strength an repeats each character n number of times where
@@ -74,8 +75,16 @@ export function powersGenerator() {
 
 }
 
-export function makeCryptoFunctions() {
-
+export function makeCryptoFunctions(options) {
+	const cipher = createCipheriv(options.using, options.forKey, options.withIV);
+	const decipher = createDecipheriv(options.using, options.forKey, options.withIV);
+	const enscryption = (message) => {
+		return cipher.update(message, 'utf8','hex') + cipher.final('hex');
+		}
+	const description = (secret) => {
+		return (decipher.update(secret, 'hex', 'utf8') + decipher.final());
+	}
+	return [enscryption, description];
 }
 
 export function topTenScorers() {
