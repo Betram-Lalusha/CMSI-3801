@@ -90,7 +90,7 @@ export async function pokemonInfo(pokemonName) {
 		}
 	};
 	const Url = "https://pokeapi.co/api/v2/pokemon/" + pokemonName;
-		return await fetch(itemIDString, params)
+		return await fetch(Url, params)
 			.then((response) => {
 				if (response.ok) {
 					return response.json();
