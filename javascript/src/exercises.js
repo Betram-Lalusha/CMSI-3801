@@ -1,4 +1,4 @@
-
+import fetch from "node-fetch";
 
 /**
  * Function takes a strength an repeats each character n number of times where
@@ -82,8 +82,27 @@ export function topTenScorers() {
 
 }
 
-export function pokemonInfo() {
-
+export async function pokemonInfo(pokemonName) {
+	const params = {
+		method: 'GET',
+		headers: {
+			'accept': 'application/json'
+		}
+	};
+	const Url = "https://pokeapi.co/api/v2/pokemon/" + pokemonName;
+		return await fetch(itemIDString, params)
+			.then((response) => {
+				if (response.ok) {
+					return response.json();
+				}
+			})
+			.then((data) => {
+				return {
+					id: data.id,
+					name: data.name,
+					weight: data.weight,
+				}
+			});
 }
 
 export class Quaternion {
