@@ -75,9 +75,9 @@ export function powersGenerator() {
 
 }
 
-export function makeCryptoFunctions(options) {
-	const cipher = createCipheriv(options.using, options.forKey, options.withIV);
-	const decipher = createDecipheriv(options.using, options.forKey, options.withIV);
+export function makeCryptoFunctions({using: algorithm, forKey: key, withIV: IV}) {
+	const cipher = createCipheriv(algorithm,key,IV);
+	const decipher = createDecipheriv(algorithm,key,IV);
 	const enscryption = (message) => {
 		return cipher.update(message, 'utf8','hex') + cipher.final('hex');
 		}
@@ -85,7 +85,7 @@ export function makeCryptoFunctions(options) {
 		return (decipher.update(secret, 'hex', 'utf8') + decipher.final());
 	}
 	return [enscryption, description];
-}
+} 
 
 export function topTenScorers() {
 
