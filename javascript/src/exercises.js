@@ -2,121 +2,140 @@ import fetch from "node-fetch";
 import { createCipheriv, createDecipheriv } from "crypto";
 
 /**
- * Function takes a strength an repeats each character n number of times where
- * n is the posistion of the character in the string 1-indexed.
- * @param {*} string: the string to stretch
- * @returns : the orginal string with the i-th character repeated i times
+ * Accepts a number of U.S. cents and returns an array containing, respectively,
+ * the smallest number of U.S. quarters, dimes, nickels, and pennies that equal the given amount.
+ * @param amount Number of cents to convert into change
+ * @returns Array containing the converted change in quarters, dimes, nickels, and pennies, respectively
  */
-export function stretched(string) {
-	var stretchedString = "";
-	var stringWithoutSpace = string.replace(/ /g, ''); //code adopted from https://stackoverflow.com/questions/6623231/remove-all-white-spaces-from-text
-	var stringArray = string.split(" ");
-	var arr = Array.from(stringWithoutSpace);
-	for (let i = 1; i <= arr.length; i++) {
-		stretchedString += arr[i - 1].repeat(i);
-	}
-
-	return stretchedString;
-}
-
 export function change(amount) {
-	if (amount < 0) {
-		throw new RangeError("must be a positive value");
-	}
-	var coinvalue = [25, 10, 5, 1];
-	var changeamount = [0, 0, 0, 0];
-	var amountleft = amount;
-	if (amount == 0) {
-		return changeamount;
-	}
+  if (amount < 0) {
+    throw new RangeError("Amount cannot be negative");
+  }
+  const coinValues = [25, 10, 5, 1];
+  const changeAmount = [0, 0, 0, 0];
 
-	while (amountleft > 0) {
-		changeamount[0] = Math.floor(amount / coinvalue[0]);
-        amountleft = amountleft - (coinvalue[0] * changeamount[0]);
-        changeamount[1] = Math.floor(amountleft / coinvalue[1]);
-        amountleft = amountleft - (coinvalue[1] * changeamount[1]);
-        changeamount[2] = Math.floor(amountleft / coinvalue[2]);
-		amountleft = amountleft - (coinvalue[2] * changeamount[2]);
-		changeamount[3] = amountleft;
-        amountleft = amountleft - changeamount[3];
-	}
+  let amountLeft = amount;
+  changeAmount[0] = Math.floor(amountLeft / coinValues[0]);
+  amountLeft -= coinValues[0] * changeAmount[0];
+  changeAmount[1] = Math.floor(amountLeft / coinValues[1]);
+  amountLeft -= coinValues[1] * changeAmount[1];
+  changeAmount[2] = Math.floor(amountLeft / coinValues[2]);
+  amountLeft -= coinValues[2] * changeAmount[2];
+  changeAmount[3] = amountLeft;
 
-	return changeamount;
-
+  return changeAmount;
 }
 
 /**
- * 
- * @param {*} phrase: the phrase to add to the chain of words to say 
- * @returns: "" if the function is called without an argument or an anonymous function
- *           that keeps adding phrases passed in as arguments to the current phrase
- * Note: help on how to solve this problem was obtained from the following stackoverflow chain: https://stackoverflow.com/questions/55598409/write-a-function-that-can-be-invoked-as-sayhi 
+ * Function takes a string and repeats each character n number of times where
+ * n is the position of the character in the string.
+ * @param inputString The string to stretch
+ * @returns The original string with the i-th character repeated i times
+ */
+export function stretched(inputString) {
+  let outputString = "";
+  let charIndex = 1;
+  for (const inputChar of inputString) {
+    if (inputChar != " ") {
+      outputString += inputChar.repeat(charIndex);
+      charIndex++;
+    }
+  }
+  return outputString;
+}
+
+/**
+ * “Chainable” function that accepts one string per call, but when called without arguments,
+ * returns the words previously passed, in order, separated by a single space.
+ * Note: help on how to solve this problem was obtained from the following stackoverflow chain:
+ * https://stackoverflow.com/questions/55598409/write-a-function-that-can-be-invoked-as-sayhi
+ * @param phrase Phrase to add to the chain of words to say
+ * @returns Empty string if the function is called without an argument or a helper function
+ * 			that keeps adding phrases passed in as arguments to the current phrase.
  */
 export function say(phrase) {
-	return phrase === undefined ? "" : function sayHelper(newPhrase) {
-		return newPhrase === undefined ? phrase : say(phrase + " " + newPhrase);
-	}
-}
-export function powers(base, limit, p) {
-	var exponent = Math.log(Math.abs(limit))/ Math.log(Math.abs(base));
-    exponent = Math.floor(exponent);
-    for (let i = 0; i <= (exponent); i++) {
-        p(Math.pow(base, i));
-	}
-	if (base < 0){
-		if (Math.pow(base, exponent) > 0){
-		exponent++;
-		p(Math.pow(base, exponent));
-		}
-	}
+  return phrase === undefined
+    ? ""
+    : function sayHelper(newPhrase) {
+        return newPhrase === undefined ? phrase : say(phrase + " " + newPhrase);
+      };
 }
 
-export function powersGenerator() {
-
+/**
+ * A function that yields successive powers of a base starting at the 0th power and going up to some limit.
+ * @param base Base number to obtain powers of
+ * @param limit Limit to stop at
+ * @param callback Callback function to pass values to
+ */
+export function powers(base, limit, callback) {
+  let result = 1;
+  let exponent = 0;
+  while (result <= limit) {
+    callback(result);
+    exponent++;
+    result = base ** exponent;
+  }
 }
 
-export function makeCryptoFunctions({using: algorithm, forKey: key, withIV: IV}) {
-	const cipher = createCipheriv(algorithm,key,IV);
-	const decipher = createDecipheriv(algorithm,key,IV);
-	const enscryption = (message) => {
-		return cipher.update(message, 'utf8','hex') + cipher.final('hex');
-		}
-	const description = (secret) => {
-		return (decipher.update(secret, 'hex', 'utf8') + decipher.final());
-	}
-	return [enscryption, description];
-} 
-
-export function topTenScorers() {
-
+/**
+ * Generator function that yields successive powers of a base starting at the 0th power and going up to some limit.
+ * @param base Base number to obtain powers of
+ * @param limit Limit to stop at
+ */
+export function* powersGenerator(base, limit) {
+  let result = 1;
+  let exponent = 0;
+  while (result <= limit) {
+    yield result;
+    exponent++;
+    result = base ** exponent;
+  }
 }
 
+export function makeCryptoFunctions({
+  using: algorithm,
+  forKey: key,
+  withIV: IV,
+}) {
+  const cipher = createCipheriv(algorithm, key, IV);
+  const decipher = createDecipheriv(algorithm, key, IV);
+  const enscryption = (message) => {
+    return cipher.update(message, "utf8", "hex") + cipher.final("hex");
+  };
+  const description = (secret) => {
+    return decipher.update(secret, "hex", "utf8") + decipher.final();
+  };
+  return [enscryption, description];
+}
+
+export function topTenScorers() {}
+
+/**
+ * Async function to fetch a Pokémon’s id, name, and weight from the Poké API.
+ * @param pokemonName Name of Pokémon to obtain data of
+ * @returns Object containing the id, name, and weight of the Pokémon who's name was given
+ */
 export async function pokemonInfo(pokemonName) {
-	const params = {
-		method: 'GET',
-		headers: {
-			'accept': 'application/json'
-		}
-	};
-	const Url = "https://pokeapi.co/api/v2/pokemon/" + pokemonName;
-		return await fetch(Url, params)
-			.then((response) => {
-				if (response.ok) {
-					return response.json();
-				}
-			})
-			.then((data) => {
-				return {
-					id: data.id,
-					name: data.name,
-					weight: data.weight,
-				}
-			});
+  const params = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+    },
+  };
+  const url = "https://pokeapi.co/api/v2/pokemon/" + pokemonName;
+  return await fetch(url, params)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then((data) => {
+      return {
+        id: data.id,
+        name: data.name,
+        weight: data.weight,
+      };
+    });
 }
 
-export class Quaternion {
-
-}
-
-
-stretched("😄🤗💀")
+export class Quaternion {}
