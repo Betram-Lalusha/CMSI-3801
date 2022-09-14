@@ -1,8 +1,9 @@
 # CMSI-3801
 
-*AUTHORS
+*AUTHORS*
 
 Betram Lalusha,
 Berke Matthew Voskericyan,
 Clayton Bruce,
-Dylan Lim
+Dylan Lim,
+Michail Mavromatis
