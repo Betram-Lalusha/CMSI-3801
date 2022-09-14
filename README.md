@@ -1,6 +1,6 @@
 # CMSI-3801
 
-*AUTHORS*
+**AUTHORS**
 
 Betram Lalusha,
 Berke Matthew Voskericyan,
