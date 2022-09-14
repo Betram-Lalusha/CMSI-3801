@@ -114,7 +114,14 @@ export function makeCryptoFunctions({
   return [encryption, decryption]
 }
 
-export function topTenScorers() {}
+export function topTenScorers(list) {
+	return Object.entries(list)
+    .flatMap(([team, players]) => players.map(player => [...player, team]))
+    .filter(([, totalGames, ,]) => totalGames >= 15)
+    .map(([name, totalGames, points, team]) => ({ name, ppg: points / totalGames, team }))
+    .sort((p1, p2) => p2.ppg - p1.ppg)
+    .slice(0,10)
+}
 
 /**
  * Async function to fetch a Pokémon’s id, name, and weight from the Poké API.
