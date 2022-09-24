@@ -2,9 +2,11 @@ import math
 
 
 def change(amount: int) -> tuple:
-    if not type(amount) is int or amount < 0:
+    if not type(amount) is int:
         raise TypeError(
-            "Please enter numbers only with no decimals. Negative numbers not allowed")
+            "amount cannot be negative")
+    elif amount < 0:
+        raise ValueError("amount cannot be negative")
     else:
         index = 0
         resIndex = 0

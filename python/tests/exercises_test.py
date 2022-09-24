@@ -36,10 +36,11 @@ def test_stretched():
     assert stretched("  \t\n  \t") == ""
     assert stretched("  Hi  hi  ") == "Hiihhhiiii"
     assert stretched("😁😂😱") == "😁😂😂😱😱😱"
-    assert stretched("hello world") == "heelllllllooooowwwwwwooooooorrrrrrrrllllllllldddddddddd"
+    assert stretched(
+        "hello world") == "heelllllllooooowwwwwwooooooorrrrrrrrllllllllldddddddddd"
     with pytest.raises(TypeError):
         # Test that the argument MUST be a positional argument
-        stretched(s = '')
+        stretched(s='')
 
 
 def test_powers():
@@ -68,7 +69,7 @@ def test_say():
         'Colette')() == 'hello my name is Colette'
     with pytest.raises(TypeError):
         # Test that the argument MUST be a positional argument
-        say(s = '')
+        say(s='')
 
 
 def test_find_first_then_lower_case():
@@ -76,8 +77,10 @@ def test_find_first_then_lower_case():
         find_first_then_lower(lambda s: len(s) > 10, [])
     with pytest.raises(ValueError):
         find_first_then_lower(lambda s: len(s) > 5, ["hello", "world"])
-    assert find_first_then_lower(lambda s: s.startswith("HELL"), ["HELLO", "WORLD"]) == "hello"
-    assert find_first_then_lower(lambda s: "d!" in s, ["Hello", "World!!"]) == "world!!"
+    assert find_first_then_lower(lambda s: s.startswith("HELL"), [
+                                 "HELLO", "WORLD"]) == "hello"
+    assert find_first_then_lower(
+        lambda s: "d!" in s, ["Hello", "World!!"]) == "world!!"
 
 
 def test_top_ten_scorers():
@@ -145,7 +148,7 @@ def test_top_ten_scorers():
 def test_crypto_functions():
     encode, decode = crypto_functions()
     for message in (b'', b'abc', bytes('😜😍😞🦾👀', 'utf-8')):
-        assert(decode(encode(message))) == message
+        assert (decode(encode(message))) == message
 
 
 def test_quaternions():
