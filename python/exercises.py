@@ -26,11 +26,16 @@ def change(amount: int) -> tuple:
 
 
 def stretched(String: str) -> str:
-    return ""
+    spacelessString = "".join(String.split())
+    stretchedString = ""
+    for index, Char in enumerate(spacelessString):
+        stretchedString += Char * (index + 1)
+    return stretchedString
 
 
-def powers(*, base: int, limit: int) -> list:
-    return []
+def powers(*, base: int, limit: int) -> Iterator:
+    for result in (base ** exponent for exponent in range(0, limit) if base ** exponent <= limit):
+        yield result
 
 
 def say(String: str) -> str:
