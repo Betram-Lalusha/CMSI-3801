@@ -1,4 +1,6 @@
 import math
+from dataclasses import dataclass
+from typing import Iterator
 
 
 def change(amount: int) -> tuple:
@@ -54,5 +56,31 @@ def crypto_functions():
     return
 
 
-def Quaternion(q1: int, q2: int, q3: int, q4: int):
-    return
+@dataclass(frozen=True)
+class Quaternion:
+    q0: int
+    q1: int
+    q2: int
+    q3: int
+
+    def __add__(self, other):
+        sum1 = self.q0 + other.q0
+        sum2 = self.q1 + other.q1
+        sum3 = self.q2 + other.q2
+        sum4 = self.q3 + other.q3
+        return Quaternion(sum1, sum2, sum3, sum4)
+
+    def __mul__(self, other):
+        t0 = self.q0 * other.q0 - self.q1 * other.q1 - \
+            self.q2 * other.q2 - self.q3 * other.q3
+        t1 = self.q0 * other.q1 + self.q1 * other.q0 + \
+            self.q2 * other.q3 - self.q3 * other.q2
+        t2 = self.q0 * other.q2 - self.q1 * other.q3 + \
+            self.q2 * other.q0 + self.q3 * other.q1
+        t3 = self.q0 * other.q3 + self.q1 * other.q2 - \
+            self.q2 * other.q1 + self.q3 * other.q0
+        return Quaternion(t0, t1, t2, t3)
+
+    @property
+    def coefficients(self):
+        return (self.q0, self.q1, self.q2, self.q3)
