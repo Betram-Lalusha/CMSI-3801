@@ -35,13 +35,21 @@ def stretched(String: str) -> str:
     return stretchedString
 
 
-def powers(*, base: int, limit: int) -> Iterator:
-    for result in (base ** exponent for exponent in range(0, limit) if base ** exponent <= limit):
+def powers(*, base: int, limit: int) -> int:
+    for result in (base ** exponent for exponent in range(0, limit)):
+        if result > limit:
+            break
         yield result
 
-
-def say(String: str) -> str:
-    return ""
+# Currying help from: https://stackoverflow.com/a/39038455
+def say(String = "") -> str:
+    def _sayHelper(newString = "") -> str:
+        if newString == "":
+            return _sayHelper.s
+        _sayHelper.s += " " + newString
+        return _sayHelper
+    _sayHelper.s = String
+    return _sayHelper if String != "" else ""
 
 
 def find_first_then_lower() -> str:
