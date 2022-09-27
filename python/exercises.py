@@ -1,6 +1,8 @@
 import math
 from dataclasses import dataclass
 from typing import Iterator
+from os import urandom
+from Crypto.Cipher import AES
 
 
 def change(amount: int) -> tuple:
@@ -59,9 +61,16 @@ def find_first_then_lower() -> str:
 def top_ten_scorers(object: object) -> object:
     return {}
 
+def makeCryptoFunctions(secret_key=urandom(16), algorithm=AES.MODE_CBC, iv=urandom(16)):
+    cipher = AES.new(secret_key, algorithm, iv)
+    decipher = AES.new(secret_key, algorithm, iv)
+    
+    def encryption (message):
+        return cipher.encrypt(message)
 
-def crypto_functions():
-    return
+    def decryption(secret):
+        return decipher.decrypt(secret)
+    return [encryption, decryption]
 
 
 @dataclass(frozen=True)
