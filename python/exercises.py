@@ -1,8 +1,6 @@
 import math
 from dataclasses import dataclass
-from typing import Iterator
-from os import urandom
-from Crypto.Cipher import AES
+#from Crypto.Cipher import AES
 
 
 def change(amount: int) -> tuple:
@@ -54,15 +52,19 @@ def say(String = "") -> str:
     return _sayHelper if String != "" else ""
 
 
-def find_first_then_lower() -> str:
-    return ""
+def find_first_then_lower(func, stringList = []) -> str:
+    for String in stringList:
+        if func(String):
+            return String.lower()
+    raise ValueError("No value in given list satisfies property.")
 
 
 def top_ten_scorers(object: object) -> object:
     return {}
 
-def makeCryptoFunctions(secret_key=urandom(16), algorithm=AES.MODE_CBC, iv=urandom(16)):
-    cipher = AES.new(secret_key, algorithm, iv)
+def crypto_functions():
+    #original parameters: secret_key=urandom(16), algorithm=AES.MODE_CBC, iv=urandom(16)
+    '''cipher = AES.new(secret_key, algorithm, iv)
     decipher = AES.new(secret_key, algorithm, iv)
     
     def encryption (message):
@@ -70,7 +72,8 @@ def makeCryptoFunctions(secret_key=urandom(16), algorithm=AES.MODE_CBC, iv=urand
 
     def decryption(secret):
         return decipher.decrypt(secret)
-    return [encryption, decryption]
+    return [encryption, decryption]'''
+    return []
 
 
 @dataclass(frozen=True)
