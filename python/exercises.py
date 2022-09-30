@@ -58,9 +58,23 @@ def find_first_then_lower(func, stringList = []) -> str:
             return String.lower()
     raise ValueError("No value in given list satisfies property.")
 
-
 def top_ten_scorers(object: object) -> object:
-    return {}
+    top_ten = []
+    unsorted_map = {}
+    for key, val in object.items():
+        for item in val:
+            if item[1] > 14:
+                scope_per_game = "{:.2f}".format(item[2] / item[1])
+                unsorted_map[item[0] + "/" + key] = scope_per_game
+    value_key_pairs = ((value, key) for (key, value) in unsorted_map.items())
+    sorted_value_key_pairs = (sorted(value_key_pairs, reverse=True)[:10])
+    {k: v for v, k in sorted_value_key_pairs}
+    for x in range(10):
+        ppg = sorted_value_key_pairs[x][0]
+        splits = sorted_value_key_pairs[x][1].split("/")
+        top_ten.append(splits[0] + "|" + ppg + "|" + splits[1])
+    #print(top_ten)
+    return(top_ten)
 
 def crypto_functions():
     """Crypto Function: returns an array of both encode and decode functions"""
