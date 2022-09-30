@@ -69,12 +69,13 @@ def top_ten_scorers(object: object) -> object:
     value_key_pairs = ((value, key) for (key, value) in unsorted_map.items())
     sorted_value_key_pairs = (sorted(value_key_pairs, reverse=True)[:10])
     {k: v for v, k in sorted_value_key_pairs}
-    for x in range(10):
-        ppg = sorted_value_key_pairs[x][0]
-        splits = sorted_value_key_pairs[x][1].split("/")
+    for item in sorted_value_key_pairs:
+        ppg = item[0]
+        splits = item[1].split("/")
         top_ten.append(splits[0] + "|" + ppg + "|" + splits[1])
     #print(top_ten)
     return(top_ten)
+print(top_ten_scorers(input))
 
 def crypto_functions():
     """Crypto Function: returns an array of both encode and decode functions"""
