@@ -63,16 +63,13 @@ def top_ten_scorers(object: object) -> object:
     return {}
 
 def crypto_functions():
-    #original parameters: secret_key=urandom(16), algorithm=AES.MODE_CBC, iv=urandom(16)
-    '''cipher = AES.new(secret_key, algorithm, iv)
-    decipher = AES.new(secret_key, algorithm, iv)
-    
-    def encryption (message):
-        return cipher.encrypt(message)
-
-    def decryption(secret):
-        return decipher.decrypt(secret)
-    return [encryption, decryption]'''
+    #used help from https://onboardbase.com/blog/aes-encryption-decryption
+    #from Crypto.Cipher import AES
+    #from Crypto.Random import get_random_bytes
+    #"""Crypto Function: returns an array of both encode and decode functions"""
+    #key = get_random_bytes(16)
+    #cipher = AES.new(key, AES.MODE_EAX)
+    #return [cipher.encrypt_and_digest, cipher.decrypt_and_verify]
     return []
 
 
