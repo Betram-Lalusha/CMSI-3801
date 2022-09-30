@@ -1,11 +1,7 @@
+from base64 import encode
 import math
 from dataclasses import dataclass
 from cryptography.fernet import Fernet
-
-# global variables
-key = Fernet.generate_key()
-f = Fernet(key)
-
 
 def change(amount: int) -> tuple:
     if not type(amount) is int:
@@ -45,9 +41,8 @@ def powers(*, base: int, limit: int) -> int:
             break
         yield result
 
+
 # Currying help from: https://stackoverflow.com/a/39038455
-
-
 def say(String="") -> str:
     def _sayHelper(newString="") -> str:
         if newString == "":
@@ -81,12 +76,16 @@ def top_ten_scorers(object: object) -> object:
         print(top_ten)
         splits = val.split("/")
         top_ten.append(splits[0] + "|" + ppg + "|" + splits[1])
-    # print(top_ten)
     return (top_ten)
 
 
 def crypto_functions():
-    """Crypto Function: returns an array of both encode and decode functions"""
+    key = Fernet.generate_key()
+    fernetKey = Fernet(key)
+    def encode(message):
+        return fernetKey.encrypt(message)
+    def decode(encryption):
+        return fernetKey.decrypt(encryption)
     return encode, decode
 
 
@@ -118,12 +117,3 @@ class Quaternion:
     @property
     def coefficients(self):
         return (self.q0, self.q1, self.q2, self.q3)
-
-
-# helper functions
-def encode(message):
-    return f.encrypt(message)
-
-
-def decode(encryption):
-    return f.decrypt(encryption)
