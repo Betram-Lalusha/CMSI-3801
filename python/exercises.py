@@ -2,6 +2,10 @@ import math
 from dataclasses import dataclass
 from cryptography.fernet import Fernet
 
+# global variables
+key = Fernet.generate_key()
+f = Fernet(key)
+
 
 def change(amount: int) -> tuple:
     if not type(amount) is int:
@@ -81,14 +85,9 @@ def top_ten_scorers(object: object) -> object:
     return (top_ten)
 
 
-print(top_ten_scorers(input))
-
-
 def crypto_functions():
     """Crypto Function: returns an array of both encode and decode functions"""
-    key = Fernet.generate_key()
-    f = Fernet(key)
-    return [f.encrypt, f.decrypt]
+    return encode, decode
 
 
 @dataclass(frozen=True)
@@ -119,3 +118,12 @@ class Quaternion:
     @property
     def coefficients(self):
         return (self.q0, self.q1, self.q2, self.q3)
+
+
+# helper functions
+def encode(message):
+    return f.encrypt(message)
+
+
+def decode(encryption):
+    return f.decrypt(encryption)
