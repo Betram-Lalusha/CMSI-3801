@@ -72,33 +72,23 @@ def top_ten_scorers(object: object) -> object:
     value_key_pairs = ((value, key) for (key, value) in unsorted_map.items())
     sorted_value_key_pairs = (sorted(value_key_pairs, reverse=True)[:10])
     {k: v for v, k in sorted_value_key_pairs}
-    for x in range(10):
-        ppg = sorted_value_key_pairs[x][0]
-        splits = sorted_value_key_pairs[x][1].split("/")
+    for key, val in sorted_value_key_pairs:
+        ppg = key
+        print(top_ten)
+        splits = val.split("/")
         top_ten.append(splits[0] + "|" + ppg + "|" + splits[1])
     # print(top_ten)
     return (top_ten)
 
 
+print(top_ten_scorers(input))
+
+
 def crypto_functions():
-
-
-<< << << < HEAD
-"""Crypto Function: returns an array of both encode and decode functions"""
-key = Fernet.generate_key()
-f = Fernet(key)
-return [f.encrypt, f.decrypt]
-== == == =
-# used help from https://onboardbase.com/blog/aes-encryption-decryption
-#from Crypto.Cipher import AES
-#from Crypto.Random import get_random_bytes
-#"""Crypto Function: returns an array of both encode and decode functions"""
-#key = get_random_bytes(16)
-#cipher = AES.new(key, AES.MODE_EAX)
-# return [cipher.encrypt_and_digest, cipher.decrypt_and_verify]
-
-return []
->>>>>> > de265ce... changes
+    """Crypto Function: returns an array of both encode and decode functions"""
+    key = Fernet.generate_key()
+    f = Fernet(key)
+    return [f.encrypt, f.decrypt]
 
 
 @dataclass(frozen=True)
