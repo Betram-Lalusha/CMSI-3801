@@ -11,30 +11,30 @@ import java.util.Optional;
 
 public class ExercisesTest {
 
-    @Test
-    public void testChange() {
-        assertThrows(IllegalArgumentException.class, () -> Exercises.change(-20));
-        assertEquals(List.of(0, 0, 0, 0), Exercises.change(0));
-        assertEquals(List.of(0, 0, 0, 1), Exercises.change(1));
-        assertEquals(List.of(0, 1, 0, 3), Exercises.change(13));
-        assertEquals(List.of(2, 0, 0, 0), Exercises.change(50));
-        assertEquals(List.of(0, 0, 1, 0), Exercises.change(5));
-        assertEquals(List.of(15, 2, 0, 2), Exercises.change(397));
-        assertEquals(List.of(1, 1, 1, 2), Exercises.change(42));
-        assertEquals(List.of(40000000, 1, 1, 2), Exercises.change(1000000017));
-    }
-
-    @Test
-    public void testStretched() {
-        assertEquals("", Exercises.stretched(""));
-        assertEquals("", Exercises.stretched("  "));
-        assertEquals("", Exercises.stretched("  \t\n  \t"));
-        assertEquals("Hiihhhiiii", Exercises.stretched("  Hi  hi  "));
-        assertEquals("😁😂😂😱😱😱", Exercises.stretched("😁😂😱"));
-        assertEquals(
-                "heelllllllooooowwwwwwooooooorrrrrrrrllllllllldddddddddd",
-                Exercises.stretched("hello world"));
-    }
+//    @Test
+//    public void testChange() {
+//        assertThrows(IllegalArgumentException.class, () -> Exercises.change(-20));
+//        assertEquals(List.of(0, 0, 0, 0), Exercises.change(0));
+//        assertEquals(List.of(0, 0, 0, 1), Exercises.change(1));
+//        assertEquals(List.of(0, 1, 0, 3), Exercises.change(13));
+//        assertEquals(List.of(2, 0, 0, 0), Exercises.change(50));
+//        assertEquals(List.of(0, 0, 1, 0), Exercises.change(5));
+//        assertEquals(List.of(15, 2, 0, 2), Exercises.change(397));
+//        assertEquals(List.of(1, 1, 1, 2), Exercises.change(42));
+//        assertEquals(List.of(40000000, 1, 1, 2), Exercises.change(1000000017));
+//    }
+//
+//    @Test
+//    public void testStretched() {
+//        assertEquals("", Exercises.stretched(""));
+//        assertEquals("", Exercises.stretched("  "));
+//        assertEquals("", Exercises.stretched("  \t\n  \t"));
+//        assertEquals("Hiihhhiiii", Exercises.stretched("  Hi  hi  "));
+//        assertEquals("😁😂😂😱😱😱", Exercises.stretched("😁😂😱"));
+//        assertEquals(
+//                "heelllllllooooowwwwwwooooooorrrrrrrrllllllllldddddddddd",
+//                Exercises.stretched("hello world"));
+//    }
 
 //    @Test
 //    public void testPowersStream() {

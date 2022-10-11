@@ -5,7 +5,7 @@ public class Exercises {
         return List.of(0,0,0,0);
     }
     
-    public static String stretched(String toStretch) {
+    public  static String stretched(String toStretch) {
         return "";
     }
     
