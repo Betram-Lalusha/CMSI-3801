@@ -15,7 +15,7 @@ public class Exercises {
         return powers;
     }
 
-    public static boolean findFirstThenLower(Predicate<String> pred, List<String> words) {
-        return false;
+    public static Optional findFirstThenLower(Predicate<String> predicate, List<String> words) {
+        return words.stream().filter(predicate).findFirst().map(s -> s.toLowerCase());
     }
 }
