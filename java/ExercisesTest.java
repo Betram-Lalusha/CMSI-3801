@@ -60,21 +60,21 @@ public class ExercisesTest {
         // Exercises.say("🐤🦇").and("$🦊👏🏽").and("!").ok());
         // }
         //
-        // @Test
-        // public void testFindFirstAndLowerCase() {
-        // assertEquals(Optional.empty(),
-        // Exercises.findFirstThenLower(s -> s.length() > 10,
-        // List.of()));
-        // assertEquals(Optional.empty(),
-        // Exercises.findFirstThenLower(s -> s.length() > 5,
-        // List.of("hello", "world")));
-        // assertEquals(Optional.of("hello"),
-        // Exercises.findFirstThenLower(s -> s.startsWith("HELL"),
-        // List.of("HELLO", "WORLD")));
-        // assertEquals(Optional.of("world!!"),
-        // Exercises.findFirstThenLower(s -> s.contains("d!"),
-        // List.of("Hello", "World!!")));
-        // }
+        @Test
+        public void testFindFirstAndLowerCase() {
+                assertEquals(Optional.empty(),
+                                Exercises.findFirstThenLower(s -> s.length() > 10,
+                                                List.of()));
+                assertEquals(Optional.empty(),
+                                Exercises.findFirstThenLower(s -> s.length() > 5,
+                                                List.of("hello", "world")));
+                assertEquals(Optional.of("hello"),
+                                Exercises.findFirstThenLower(s -> s.startsWith("HELL"),
+                                                List.of("HELLO", "WORLD")));
+                assertEquals(Optional.of("world!!"),
+                                Exercises.findFirstThenLower(s -> s.contains("d!"),
+                                                List.of("Hello", "World!!")));
+        }
         //
         // @Test
         // public void testTopTenScorers() {
