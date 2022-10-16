@@ -48,7 +48,7 @@ public record Quaternion(double a, double b, double c, double d) {
     }
 
     public List<Double> coefficients() {
-        return (List<Double>) List.of(this.a, this.b, this.c, this.d);
+        return List.of(this.a, this.b, this.c, this.d);
     }
 
     @Override
