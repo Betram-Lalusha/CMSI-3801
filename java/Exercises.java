@@ -43,4 +43,11 @@ public class Exercises {
     public static Optional<String> findFirstThenLower(Predicate<String> predicate, List<String> words) {
         return words.stream().filter(predicate).findFirst().map(String::toLowerCase);
     }
+
+    public static Chainable say(String inputString) {
+        return new Chainable(inputString);
+    }
+    public static Object say() {
+        return "";
+    }
 }
