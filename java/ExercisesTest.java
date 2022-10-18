@@ -51,6 +51,16 @@ public class ExercisesTest {
         // new int[] { 1, 10, 100, 1000 });
         // }
 
+        @Test
+    public void testPowersWithConsumer() {
+        var a = new ArrayList<Integer>();
+        IntConsumer addToList = i -> a.add(i);
+        Exercises.powers(2, 1, addToList);
+        assertEquals(List.of(1), a);
+        Exercises.powers(-3, 81, addToList);
+        assertEquals(List.of(1, 1, -3, 9, -27, 81, -243), a);
+    }
+
         //
         // @Test
         // public void testSay() {

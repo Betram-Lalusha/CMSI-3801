@@ -1,6 +1,7 @@
 import java.util.*;
 import java.util.stream.*;
 import java.util.regex.*;
+import java.util.function.IntConsumer;
 import java.util.function.Predicate;
 
 public class Exercises {
@@ -38,6 +39,12 @@ public class Exercises {
 
     public static int[] powers(int base) {
         return new int[base];
+    }
+    
+    public static void powers(int base, int limit, IntConsumer consume) {
+        for (int power = 1; power <= limit; power *= base) {
+            consume.accept(power);
+        }
     }
 
     public static Optional<String> findFirstThenLower(Predicate<String> predicate, List<String> words) {
