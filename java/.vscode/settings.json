@@ -1,8 +1,0 @@
-{
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "/Users/betramlalusha/Downloads/junit-platform-console-standalone-1.9.1.jar",
-        "/Users/betramlalusha/Downloads/junit-4.13.1.jar"
-    ]
-    // "java.home": "/usr/lib/jvm/java-19-openjdk-amd64"
-}
