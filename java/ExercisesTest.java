@@ -26,9 +26,9 @@ public class ExercisesTest {
 
         @Test
         public void testStretched() {
-                // assertEquals("", Exercises.stretched(""));
-                // assertEquals("", Exercises.stretched(" "));
-                // assertEquals("", Exercises.stretched(" \t\n \t"));
+                assertEquals("", Exercises.stretched(""));
+                assertEquals("", Exercises.stretched(" "));
+                assertEquals("", Exercises.stretched(" \t\n \t"));
                 assertEquals("Hiihhhiiii", Exercises.stretched(" Hi hi "));
                 assertEquals("😁😂😂😱😱😱", Exercises.stretched("😁😂😱"));
                 assertEquals(
@@ -36,41 +36,30 @@ public class ExercisesTest {
                                 Exercises.stretched("hello world"));
         }
 
-        // @Test
-        // public void testPowersStream() {
-        // assertArrayEquals(
-        // new int[] { 1, 1, 1, 1, 1 },
-        // Exercises.powers(1).limit(5).toArray());
-        // assertArrayEquals(Exercises.powers(7).limit(10).toArray(),
-        // new int[] { 1, 7, 49, 343, 2401, 16807, 117649, 823543,
-        // 5764801,
-        // 40353607 });
-        // assertArrayEquals(Exercises.powers(-3).limit(5).toArray(),
-        // new int[] { 1, -3, 9, -27, 81 });
-        // assertArrayEquals(Exercises.powers(10).limit(4).toArray(),
-        // new int[] { 1, 10, 100, 1000 });
-        // }
+        @Test
+        public void testPowersStream() {
+                assertArrayEquals(
+                                new int[] { 1, 1, 1, 1, 1 },
+                                Exercises.powers(1).limit(5).toArray());
+                assertArrayEquals(Exercises.powers(7).limit(10).toArray(),
+                                new int[] { 1, 7, 49, 343, 2401, 16807, 117649, 823543,
+                                                5764801,
+                                                40353607 });
+                assertArrayEquals(Exercises.powers(-3).limit(5).toArray(),
+                                new int[] { 1, -3, 9, -27, 81 });
+                assertArrayEquals(Exercises.powers(10).limit(4).toArray(),
+                                new int[] { 1, 10, 100, 1000 });
+        }
 
         @Test
-    public void testPowersWithConsumer() {
-        var a = new ArrayList<Integer>();
-        IntConsumer addToList = i -> a.add(i);
-        Exercises.powers(2, 1, addToList);
-        assertEquals(List.of(1), a);
-        Exercises.powers(-3, 81, addToList);
-        assertEquals(List.of(1, 1, -3, 9, -27, 81, -243), a);
-    }
+        public void testSay() {
+                assertEquals("A", Exercises.say("A").ok());
+                assertEquals("", Exercises.say());
+                assertEquals("A B", Exercises.say("A").and("B").ok());
+                assertEquals("🐤🦇 $🦊👏🏽 !",
+                                Exercises.say("🐤🦇").and("$🦊👏🏽").and("!").ok());
+        }
 
-        //
-        // @Test
-        // public void testSay() {
-        // assertEquals("A", Exercises.say("A").ok());
-        // assertEquals("", Exercises.say());
-        // assertEquals("A B", Exercises.say("A").and("B").ok());
-        // assertEquals("🐤🦇 $🦊👏🏽 !",
-        // Exercises.say("🐤🦇").and("$🦊👏🏽").and("!").ok());
-        // }
-        //
         @Test
         public void testFindFirstAndLowerCase() {
                 assertEquals(Optional.empty(),

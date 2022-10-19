@@ -1,7 +1,6 @@
 import java.util.*;
 import java.util.stream.*;
 import java.util.regex.*;
-import java.util.function.IntConsumer;
 import java.util.function.Predicate;
 
 public class Exercises {
@@ -37,24 +36,39 @@ public class Exercises {
         return stretchedString;
     }
 
-    public static int[] powers(int base) {
-        return new int[base];
-    }
-    
-    public static void powers(int base, int limit, IntConsumer consume) {
-        for (int power = 1; power <= limit; power *= base) {
-            consume.accept(power);
-        }
+    // Help with streams from: https://www.baeldung.com/java-inifinite-streams
+    public static IntStream powers(int base) {
+        return IntStream.iterate(1, power -> power *= base);
     }
 
     public static Optional<String> findFirstThenLower(Predicate<String> predicate, List<String> words) {
         return words.stream().filter(predicate).findFirst().map(String::toLowerCase);
     }
 
+    public static class Chainable {
+        private String phrase = "";
+
+        public Chainable(String initialPhrase) {
+            phrase += initialPhrase;
+        }
+
+        public Chainable and(String nextPhrase) {
+            phrase += " " + nextPhrase;
+            return this;
+        }
+
+        public String ok() {
+            String returnPhrase = phrase + "";
+            phrase = "";
+            return returnPhrase;
+        }
+    }
+
     public static Chainable say(String inputString) {
         return new Chainable(inputString);
     }
-    public static Object say() {
+
+    public static String say() {
         return "";
     }
 }
