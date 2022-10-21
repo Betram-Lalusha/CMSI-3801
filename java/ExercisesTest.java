@@ -6,8 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.function.IntConsumer;
 
 public class ExercisesTest {
 
@@ -31,24 +33,27 @@ public class ExercisesTest {
                 assertEquals("", Exercises.stretched(" \t\n \t"));
                 assertEquals("Hiihhhiiii", Exercises.stretched(" Hi hi "));
                 assertEquals("😁😂😂😱😱😱", Exercises.stretched("😁😂😱"));
-                assertEquals(
-                                "heelllllllooooowwwwwwooooooorrrrrrrrllllllllldddddddddd",
+                assertEquals("heelllllllooooowwwwwwooooooorrrrrrrrllllllllldddddddddd",
                                 Exercises.stretched("hello world"));
         }
 
         @Test
         public void testPowersStream() {
-                assertArrayEquals(
-                                new int[] { 1, 1, 1, 1, 1 },
-                                Exercises.powers(1).limit(5).toArray());
+                assertArrayEquals(new int[] { 1, 1, 1, 1, 1 }, Exercises.powers(1).limit(5).toArray());
                 assertArrayEquals(Exercises.powers(7).limit(10).toArray(),
-                                new int[] { 1, 7, 49, 343, 2401, 16807, 117649, 823543,
-                                                5764801,
-                                                40353607 });
-                assertArrayEquals(Exercises.powers(-3).limit(5).toArray(),
-                                new int[] { 1, -3, 9, -27, 81 });
-                assertArrayEquals(Exercises.powers(10).limit(4).toArray(),
-                                new int[] { 1, 10, 100, 1000 });
+                                new int[] { 1, 7, 49, 343, 2401, 16807, 117649, 823543, 5764801, 40353607 });
+                assertArrayEquals(Exercises.powers(-3).limit(5).toArray(), new int[] { 1, -3, 9, -27, 81 });
+                assertArrayEquals(Exercises.powers(10).limit(4).toArray(), new int[] { 1, 10, 100, 1000 });
+        }
+
+        @Test
+        public void testPowersWithConsumer() {
+                var a = new ArrayList<Integer>();
+                IntConsumer addToList = i -> a.add(i);
+                Exercises.powers(2, 1, addToList);
+                assertEquals(List.of(1), a);
+                Exercises.powers(-3, 81, addToList);
+                assertEquals(List.of(1, 1, -3, 9, -27, 81, -243), a);
         }
 
         @Test
@@ -56,24 +61,18 @@ public class ExercisesTest {
                 assertEquals("A", Exercises.say("A").ok());
                 assertEquals("", Exercises.say());
                 assertEquals("A B", Exercises.say("A").and("B").ok());
-                assertEquals("🐤🦇 $🦊👏🏽 !",
-                                Exercises.say("🐤🦇").and("$🦊👏🏽").and("!").ok());
+                assertEquals("🐤🦇 $🦊👏🏽 !", Exercises.say("🐤🦇").and("$🦊👏🏽").and("!").ok());
         }
 
         @Test
         public void testFindFirstAndLowerCase() {
+                assertEquals(Optional.empty(), Exercises.findFirstThenLower(s -> s.length() > 10, List.of()));
                 assertEquals(Optional.empty(),
-                                Exercises.findFirstThenLower(s -> s.length() > 10,
-                                                List.of()));
-                assertEquals(Optional.empty(),
-                                Exercises.findFirstThenLower(s -> s.length() > 5,
-                                                List.of("hello", "world")));
+                                Exercises.findFirstThenLower(s -> s.length() > 5, List.of("hello", "world")));
                 assertEquals(Optional.of("hello"),
-                                Exercises.findFirstThenLower(s -> s.startsWith("HELL"),
-                                                List.of("HELLO", "WORLD")));
+                                Exercises.findFirstThenLower(s -> s.startsWith("HELL"), List.of("HELLO", "WORLD")));
                 assertEquals(Optional.of("world!!"),
-                                Exercises.findFirstThenLower(s -> s.contains("d!"),
-                                                List.of("Hello", "World!!")));
+                                Exercises.findFirstThenLower(s -> s.contains("d!"), List.of("Hello", "World!!")));
         }
         //
         // @Test
@@ -135,14 +134,10 @@ public class ExercisesTest {
         @Test
         public void testQuaternionConstructorErrors() {
                 // That that NaNs are detected in each argument
-                assertThrows(IllegalArgumentException.class,
-                                () -> new Quaternion(Double.NaN, 0, 0, 0));
-                assertThrows(IllegalArgumentException.class,
-                                () -> new Quaternion(0, Double.NaN, 0, 0));
-                assertThrows(IllegalArgumentException.class,
-                                () -> new Quaternion(0, 0, Double.NaN, 0));
-                assertThrows(IllegalArgumentException.class,
-                                () -> new Quaternion(0, 0, 0, Double.NaN));
+                assertThrows(IllegalArgumentException.class, () -> new Quaternion(Double.NaN, 0, 0, 0));
+                assertThrows(IllegalArgumentException.class, () -> new Quaternion(0, Double.NaN, 0, 0));
+                assertThrows(IllegalArgumentException.class, () -> new Quaternion(0, 0, Double.NaN, 0));
+                assertThrows(IllegalArgumentException.class, () -> new Quaternion(0, 0, 0, Double.NaN));
         }
 
         @Test
@@ -169,19 +164,14 @@ public class ExercisesTest {
 
         @Test
         public void testQuaternionCoefficients() {
-                assertEquals(List.of(0.0, 0.0, 0.0, 0.0),
-                                new Quaternion(0, 0, 0, 0).coefficients());
-                assertEquals(List.of(2.0, 1.5, 10.0, -8.0),
-                                new Quaternion(2, 1.5, 10, -8).coefficients());
+                assertEquals(List.of(0.0, 0.0, 0.0, 0.0), new Quaternion(0, 0, 0, 0).coefficients());
+                assertEquals(List.of(2.0, 1.5, 10.0, -8.0), new Quaternion(2, 1.5, 10, -8).coefficients());
         }
 
         @Test
         public void testQuaternionToString() {
-                assertEquals("Quaternion[a=0.0, b=0.0, c=0.0, d=0.0]",
-                                new Quaternion(0, 0, 0, 0).toString());
-                assertEquals("Quaternion[a=0.0, b=-1.0, c=0.0, d=2.25]",
-                                new Quaternion(0, -1, 0, 2.25).toString());
-                assertEquals("Quaternion[a=0.0, b=0.0, c=0.0, d=-1.0]",
-                                Quaternion.ZERO.minus(Quaternion.K).toString());
+                assertEquals("Quaternion[a=0.0, b=0.0, c=0.0, d=0.0]", new Quaternion(0, 0, 0, 0).toString());
+                assertEquals("Quaternion[a=0.0, b=-1.0, c=0.0, d=2.25]", new Quaternion(0, -1, 0, 2.25).toString());
+                assertEquals("Quaternion[a=0.0, b=0.0, c=0.0, d=-1.0]", Quaternion.ZERO.minus(Quaternion.K).toString());
         }
 }
