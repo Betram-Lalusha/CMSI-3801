@@ -5,7 +5,6 @@ import java.util.function.IntConsumer;
 import java.util.function.Predicate;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 public class Exercises {
     public static List<Integer> change(int amount) {
@@ -81,14 +80,16 @@ public class Exercises {
     public static String say() {
         return "";
     }
-    
+
     public static List<String> topTenScorers(Map<String, List<String>> stats) {
-        ArrayList<String> topPlayers = new ArrayList<String>();
-        stats.entrySet().stream().forEach((e)->{
-            String[] items = e.getValue().toString().replace("]","").replace("[","").split(",");
-            double avg =Integer.parseInt(items[2])/Integer.parseInt(items[1]);
-            topPlayers.add(String.join("|",items[0],String.format("%.2f",avg),e.getKey()));
-    });
-        return topPlayers;
+        return stats.entrySet()
+                .stream().flatMap(e -> e.getValue().stream()
+                        .map(p -> p.split(",", 3))
+                        .filter(p -> Double.valueOf(p[1]) >= 15.0)
+                        .map(p -> String.join("|", p[0],
+                                String.format("%.2f", Double.valueOf(p[2]) / Double.valueOf(p[1])), e.getKey())))
+                .sorted((p1, p2) -> Double.valueOf(p2.split("\\|")[1]).compareTo(Double.valueOf(p1.split("\\|")[1])))
+                .limit(10)
+                .collect(Collectors.toList());
     }
 }
