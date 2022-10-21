@@ -82,39 +82,13 @@ public class Exercises {
         return "";
     }
     
-    public static List<String> topTenScorers(HashMap<String, List<String>> stats) {
-
-		List<String> topPlayers = new ArrayList<String>();
-		List<String> top10 = new ArrayList<String>();
-		List<String> top10sorted = new ArrayList<String>();
-		
-		for(Map.Entry<String, List<String>> players : stats.entrySet()) {
-			int count = (players.getValue().size());
-			for(int i = 0; i < count; i++) {
-				String[] info = players.getValue().get(i).split(",", 5);
-				if(Integer.valueOf(info[1]) >= 15) {
-					topPlayers.add(info[0] + "," + String.format("%.2f",(Double.valueOf(info[2])/Double.valueOf(info[1]))) + "," + (players.getKey()));
-				}
-			}
-		}
-		
-		while(top10.size() != 10) {
-			int indexOfHigh = 999;
-			double high = 0;
-			for(int i = 0; i < topPlayers.size(); i++) {
-				String[] info = topPlayers.get(i).split(",", 5);
-				if(Double.valueOf(info[1]) > high) {
-					high = Double.valueOf(info[1]);
-					indexOfHigh = i;
-				}
-			}
-			top10.add(topPlayers.get(indexOfHigh));
-			topPlayers.remove(indexOfHigh);
-		}
-		
-		for(int i = 0; i < top10.size(); i++) {
-			top10sorted.add(i,top10.get(i).replace(",", "|"));
-		}
-		return top10sorted;
-	}
+    public static List<String> topTenScorers(Map<String, List<String>> stats) {
+        ArrayList<String> topPlayers = new ArrayList<String>();
+        stats.entrySet().stream().forEach((e)->{
+            String[] items = e.getValue().toString().replace("]","").replace("[","").split(",");
+            double avg =Integer.parseInt(items[2])/Integer.parseInt(items[1]);
+            topPlayers.add(String.join("|",items[0],String.format("%.2f",avg),e.getKey()));
+    });
+        return topPlayers;
+    }
 }
