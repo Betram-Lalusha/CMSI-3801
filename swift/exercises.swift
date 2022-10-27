@@ -9,3 +9,15 @@ extension String {
     }
 
 }
+
+extension Array {
+    func mapThenUnique<T>(_ mapper: (Element) -> T) -> Set<T> {
+        let mapped = self.map(mapper)
+        var set : Set<T> = []
+        for element in mapped {
+            set.insert(element)
+        }
+        
+        return set
+    }
+}
