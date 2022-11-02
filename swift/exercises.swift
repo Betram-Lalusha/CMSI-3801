@@ -48,3 +48,7 @@ func powers(of: Int, through: Int, callback: (Int) -> Void) {
         power *= of
     }
 }
+
+func twice<T>(_ f: (T)->T, appliedTo x: T) -> T {
+    return f(f(x))
+}
