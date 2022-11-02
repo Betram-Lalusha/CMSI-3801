@@ -39,3 +39,12 @@ extension Array {
         return set
     }
 }
+
+func powers(of: Int, through: Int, callback: (Int) -> Void) {
+    var power = of
+    callback(1)
+    while power <= through {
+        callback(power)
+        power *= of
+    }
+}
