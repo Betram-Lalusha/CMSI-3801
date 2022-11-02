@@ -1,3 +1,21 @@
+enum NegativeAmountError : Error {
+    case negativeAmount
+}
+
+func change(_ amount: Int) -> Result<(Int, Int, Int, Int), NegativeAmountError>{
+    guard amount >= 0 else {
+        return .failure(.negativeAmount)
+    }
+    let coinValues = [25, 10, 5, 1]
+    var remaining = amount
+    let coins = coinValues.map { (coinValue) -> Int in
+        let (quotient, remainder) = remaining.quotientAndRemainder(dividingBy: coinValue)
+        remaining = remainder
+        return quotient
+    }
+    return .success((coins[0], coins[1], coins[2], coins[3]))
+}
+
 extension String {
     var stretched: String {
         var stretchedString = ""
