@@ -1,3 +1,4 @@
+//copied from class notes
 vector<pair<string, int>> sorted_word_counts(list<string> words) {
   map<string, int> counts;
   for (string word : words) {
