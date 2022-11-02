@@ -64,8 +64,8 @@ assert(scratch == [1, -3, 9, -27, 81, -243])
 // assert(greet.and("nice").and("person").phrase == "Hello there nice person")
 // assert(greet.and("Swift").phrase == "Hello there Swift")
 
-// assert(twice({$0 * 2}, appliedTo: 5.0) == 20.0)
-// assert(twice({s in s + "ee"}, appliedTo: "b") == "beeee")
+ assert(twice({$0 * 2}, appliedTo: 5.0) == 20.0)
+ assert(twice({s in s + "ee"}, appliedTo: "b") == "beeee")
 
 // assert(uppercasedFirst(of: [], longerThan: 5) == nil)
 // assert(uppercasedFirst(of: ["🎃"], longerThan: 1) == nil)
