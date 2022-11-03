@@ -52,3 +52,7 @@ func powers(of: Int, through: Int, callback: (Int) -> Void) {
 func twice<T>(_ f: (T)->T, appliedTo x: T) -> T {
     return f(f(x))
 }
+
+func uppercasedFirst(of:[String], longerThan: Int) -> String? {
+    return of.first(where: {$0.count > longerThan})?.uppercased() ?? nil
+}
