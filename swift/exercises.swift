@@ -153,5 +153,19 @@ struct Sheep: Animal {
     }
 }
 
+struct say {
+    var phrase: String
+    init(_ words: String) {
+        self.phrase = words
+    }
+    
+    func and(_ words: String) -> say {
+        var copy = self
+        copy.phrase += " "
+        copy.phrase += words
+        return copy
+    }
+}
+
 
 

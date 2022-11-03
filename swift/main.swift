@@ -55,14 +55,14 @@ struct Rat: Animal {
     let name: String
     let sound = "squeak"
 }
-// assert(Rat(name:"Oreo").speak() == "Oreo says squeak")
+assert(Rat(name:"Oreo").speak() == "Oreo says squeak")
 
-// assert(say("A").phrase == "A")
-// assert(say("A").and("B").phrase == "A B")
-// assert(say("🐤🦇").and("$🦊👏🏽").and("!").phrase == "🐤🦇 $🦊👏🏽 !")
-// var greet = say("Hello").and("there")
-// assert(greet.and("nice").and("person").phrase == "Hello there nice person")
-// assert(greet.and("Swift").phrase == "Hello there Swift")
+assert(say("A").phrase == "A")
+assert(say("A").and("B").phrase == "A B")
+assert(say("🐤🦇").and("$🦊👏🏽").and("!").phrase == "🐤🦇 $🦊👏🏽 !")
+var greet = say("Hello").and("there")
+assert(greet.and("nice").and("person").phrase == "Hello there nice person")
+assert(greet.and("Swift").phrase == "Hello there Swift")
 
  assert(twice({$0 * 2}, appliedTo: 5.0) == 20.0)
  assert(twice({s in s + "ee"}, appliedTo: "b") == "beeee")
