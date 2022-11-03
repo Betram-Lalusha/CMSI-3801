@@ -1,3 +1,5 @@
+import Foundation
+
 enum NegativeAmountError : Error {
     case negativeAmount
 }
@@ -57,7 +59,7 @@ func uppercasedFirst(of:[String], longerThan: Int) -> String? {
     return of.first(where: {$0.count > longerThan})?.uppercased() ?? nil
 }
 
-struct Quaternion {
+struct Quaternion: CustomStringConvertible {
     var a: Double
     var b: Double
     var c: Double
@@ -69,38 +71,85 @@ struct Quaternion {
         self.c = c
         self.d = d
     }
+    
+    var I : Quaternion {
+        get {return Quaternion(a:0, b:1, c:0, d:0)}
+    }
+    
+    static var I : Quaternion {
+        get {return Quaternion(a:0, b:1, c:0, d:0)}
+    }
+    
+    var J : Quaternion {
+        get {return Quaternion(a:0, b:0, c:1, d:0)}
+    }
+    
+    static var J : Quaternion {
+        get {return Quaternion(a:0, b:0, c:1, d:0)}
+    }
+    
+    var K : Quaternion {
+        get {return Quaternion(a:0, b:0, c:0, d:1)}
+    }
+    
+    static var K : Quaternion {
+        get {return Quaternion(a:0, b:0, c:0, d:1)}
+    }
+    
+    var ZERO : Quaternion {
+        get {return Quaternion(a:0, b:0, c:0, d:0)}
+    }
+    
+    static var ZERO : Quaternion {
+        get {return Quaternion(a:0, b:0, c:0, d:0)}
+    }
 
-    // func + (q2: Quaternion) -> Quaternion {
-    //     return Quaternion(
-    //         a: self.a + q2.a,
-    //         b: self.b + q2.b,
-    //         c: self.c + q2.c,
-    //         d: self.d + q2.d
-    //     )
-    // }
+    var coefficients: [Double] { return [a, b, c, d]}
 
-    // func - (q2: Quaternion) -> Quaternion  {
-    //     return Quaternion(
-    //         a: self.a - q2.a,
-    //         b: self.b - q2.b,
-    //         c: self.c - q2.c,
-    //         d: self.d - q2.d
-    //     )
-    // }
-
-    // func * (q2: Quaternion) -> Quaternion {
-    //     let a0 = self.a * q2.a - self.b * q2.b - self.c * q2.c - self.d * q2.d   
-    //     let b0 = self.a * q2.b + self.b * q2.a + self.c * q2.d - self.d * q2.c   
-    //     let c0 =  self.a * q2.c - self.b * q2.d + self.c * q2.a + self.d * q2.b
-    //     let d0 = self.a * q2.d + self.b * q2.c - self.c * q2.b + self.d * q2.a
-    //     return Quaternion(a: a0, b: b0, c: c0, d: d0)
-    // }
-
-        var description: String {
-            print("\(self.a)\(self.b)i\(self.c)j\(self.d)k")
-            return "\(self.a)\(self.b)i\(self.c)j\(self.d)k"
+    var description: String {
+        let part0 = "\(self.a)"
+        let part1 = self.b.isLess(than: 0.0) ? "" : "+"
+        let part2 = "\(self.b)i"
+        let part3 = self.c.isLess(than: 0.0) ? "" : "+"
+        let part4 = "\(self.c)j"
+        let part5 = self.d.isLess(than: 0.0) ? "" : "+"
+        let part6 = "\(self.d)k"
+        let description =  part0 + part1 + part2 + part3 + part4 + part5 + part6
+        return description  
     }
 }
+
+
+func + (q1: Quaternion, q2: Quaternion) -> Quaternion {
+    return Quaternion(
+        a: q1.a + q2.a,
+        b: q1.b + q2.b,
+        c: q1.c + q2.c,
+        d: q1.d + q2.d
+    )
+}
+
+func - (q1: Quaternion, q2: Quaternion) -> Quaternion  {
+    return Quaternion(
+        a: q1.a - q2.a,
+        b: q1.b - q2.b,
+        c: q1.c - q2.c,
+        d: q1.d - q2.d
+    )
+}
+
+func * (q1: Quaternion, q2: Quaternion) -> Quaternion {
+    let a0 = q1.a * q2.a - q1.b * q2.b - q1.c * q2.c - q1.d * q2.d
+    let b0 = q1.a * q2.b + q1.b * q2.a + q1.c * q2.d - q1.d * q2.c
+    let c0 =  q1.a * q2.c - q1.b * q2.d + q1.c * q2.a + q1.d * q2.b
+    let d0 = q1.a * q2.d + q1.b * q2.c - q1.c * q2.b + q1.d * q2.a
+    return Quaternion(a: a0, b: b0, c: c0, d: d0)
+}
+
+func == (q1: Quaternion, q2: Quaternion) -> Bool {
+    return q1.a == q2.a && q1.b == q2.b && q1.c == q2.c && q1.d == q2.d  
+}
+
 
 protocol Animal {
     var name: String { get }

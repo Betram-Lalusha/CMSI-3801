@@ -78,25 +78,25 @@ assert(q.a == 3.5)
 assert(q.b == 2.25)
 assert(q.c == -100.0)
 assert(q.d == -1.25)
-// let q1 = Quaternion(a: 1, b: 3, c: 5, d: 2)
-// let q2 = Quaternion(a: -2, b: 2, c: 8, d: -1)
-// let q3 = Quaternion(a: -1, b: 5, c: 13, d: 1)
-// let q4 = Quaternion(a: -46, b: -25, c: 5, d: 9)
-// assert(q1 + q2 == q3)
-// assert(q3 - q2 == q1)
-// assert(q1 * q2 == q4)
-// assert(Quaternion.I * Quaternion.J == Quaternion.K)
-// assert(Quaternion.ZERO.coefficients == [0, 0, 0, 0])
-// assert(Quaternion.K.coefficients == [0, 0, 0, 1])
-// assert(Quaternion(a: 2, b: 1.5, c: 10, d: -8).coefficients ==
-//     [2.0, 1.5, 10.0, -8.0])
-// assert(String(describing: Quaternion.ZERO) ==
-//     "0.0+0.0i+0.0j+0.0k")
-// assert(String(describing: Quaternion(a: 0, b: -1, c:  0, d: 2.25)) ==
-//     "0.0-1.0i+0.0j+2.25k")
-// assert(String(describing: Quaternion.ZERO - Quaternion.K) ==
-//     "0.0+0.0i+0.0j-1.0k")
-// assert(String(describing: Quaternion(a: -20, b: -1.75, c: 13, d: -2.25)) ==
-//     "-20.0-1.75i+13.0j-2.25k")
+let q1 = Quaternion(a: 1, b: 3, c: 5, d: 2)
+let q2 = Quaternion(a: -2, b: 2, c: 8, d: -1)
+let q3 = Quaternion(a: -1, b: 5, c: 13, d: 1)
+let q4 = Quaternion(a: -46, b: -25, c: 5, d: 9)
+assert(q1 + q2 == q3)
+assert(q3 - q2 == q1)
+assert(q1 * q2 == q4)
+assert(Quaternion.I * Quaternion.J == Quaternion.K)
+assert(Quaternion.ZERO.coefficients == [0, 0, 0, 0])
+assert(Quaternion.K.coefficients == [0, 0, 0, 1])
+assert(Quaternion(a: 2, b: 1.5, c: 10, d: -8).coefficients ==
+    [2.0, 1.5, 10.0, -8.0])
+assert(String(describing: Quaternion.ZERO) ==
+    "0.0+0.0i+0.0j+0.0k")
+assert(String(describing: Quaternion(a: 0, b: -1, c:  0, d: 2.25)) ==
+    "0.0-1.0i+0.0j+2.25k")
+assert(String(describing: Quaternion.ZERO - Quaternion.K) ==
+    "0.0+0.0i+0.0j-1.0k")
+assert(String(describing: Quaternion(a: -20, b: -1.75, c: 13, d: -2.25)) ==
+    "-20.0-1.75i+13.0j-2.25k")
 
 print("All tests passed")
