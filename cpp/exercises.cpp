@@ -15,34 +15,40 @@
 //   return pairs;
 // }
 
-// Time :: Time(const int h, const int m, const int s)
-//   : hour(h), minute (m), second(s)
-// {}
+Quaternion::Quaternion(double a, double b, double c, double d)
+    : a(a), b(b), c(c), d(d)
+{
+}
 
-// void Time :: setTime(const int h, const int m, const int s)
-// {
-//      hour = h;
-//      minute = m;
-//      second = s;
-// }
+Quaternion Quaternion::operator-(const Quaternion &other)
+{
+    return {a - other.a, b - other.b, c - other.c, d - other.d};
+}
 
-// void Time :: print() const
-// {
-//      cout << setw(2) << setfill('0') << hour << ":"
-// 	<< setw(2) << setfill('0') << minute << ":"
-//  	<< setw(2) << setfill('0') << second << "\n";
+Quaternion Quaternion::operator+(const Quaternion &other)
+{
+    return {a + other.a, b + other.b, c + other.c, d + other.d};
+}
 
-// }
+Quaternion Quaternion::operator*(const Quaternion &other)
+{
+    double a0 = a * other.a - b * other.b - c * other.c - d * other.d;
 
-// bool Time :: equals(const Time &otherTime)
-// {
-//      if(hour == otherTime.hour
-//           && minute == otherTime.minute
-//           && second == otherTime.second)
-//           return true;
-//      else
-//           return false;
-// }
+    double b0 =
+        a * other.b +
+        b * other.a +
+        c * other.d -
+        d * other.c;
+    double c0 =
+        a * other.c -
+        b * other.d +
+        c * other.a +
+        d * other.b;
+    double d0 =
+        a * other.d +
+        b * other.c -
+        c * other.b +
+        d * other.a;
 
-// IntStack:: Node(int value, shared_ptr next)
-//     :value(value), next(next)
+    return {a0, b0, c0, d0};
+}
