@@ -52,3 +52,8 @@ Quaternion Quaternion::operator*(const Quaternion &other)
 
     return {a0, b0, c0, d0};
 }
+
+Quaternion::ZERO = {0, 0, 0, 0};
+Quaternion::I = {0, 1, 0, 0};
+Quaternion::J = {0, 0, 1, 0};
+Quaternion::K = {0, 0, 0, 1};
