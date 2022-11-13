@@ -1,4 +1,6 @@
 #include "exercises.h"
+#include <vector>
+#include <array>
 
 // copied from class notes
 // vector<pair<string, int>> sorted_word_counts(list<string> words)
@@ -53,7 +55,17 @@ Quaternion Quaternion::operator*(const Quaternion &other)
     return {a0, b0, c0, d0};
 }
 
-Quaternion::ZERO = {0, 0, 0, 0};
-Quaternion::I = {0, 1, 0, 0};
-Quaternion::J = {0, 0, 1, 0};
-Quaternion::K = {0, 0, 0, 1};
+Quaternion Quaternion::ZERO = {0, 0, 0, 0};
+Quaternion Quaternion::I = {0, 1, 0, 0};
+Quaternion Quaternion::J = {0, 0, 1, 0};
+Quaternion Quaternion::K = {0, 0, 0, 1};
+
+array<double, 4> Quaternion::coefficients()
+{
+    return {a, b, c, d};
+}
+
+bool Quaternion::operator==(const Quaternion &other) const
+{
+    return a == other.a && b == other.b && c == other.c && d == other.d;
+}
