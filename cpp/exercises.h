@@ -14,19 +14,23 @@ vector<int> stretched_positives(vector<int> v);
 
 void powers(int base, int limit, function<void(int)> consumer);
 
-class IntStack {
-  struct Node {
+class IntStack
+{
+  struct Node
+  {
     int value;
     shared_ptr<Node> next;
   };
   shared_ptr<Node> top;
+
 public:
   int size();
   void push(int item);
   int pop();
 };
 
-struct Sayer {
+struct Sayer
+{
   string words;
   string operator()();
   Sayer operator()(string word);
@@ -35,21 +39,22 @@ extern Sayer say;
 
 vector<pair<string, int>> sorted_word_counts(list<string> words);
 
-struct Quaternion {
+struct Quaternion
+{
   const double a;
   const double b;
   const double c;
   const double d;
   Quaternion(double a, double b, double c, double d);
-  Quaternion& operator=(const Quaternion&) = delete;
+  Quaternion &operator=(const Quaternion &) = delete;
   array<double, 4> coefficients();
-  Quaternion operator+(const Quaternion& other);
-  Quaternion operator-(const Quaternion& other);
-  Quaternion operator*(const Quaternion& other);
-  bool operator==(const Quaternion& other) const;
+  Quaternion operator+(const Quaternion &other);
+  Quaternion operator-(const Quaternion &other);
+  Quaternion operator*(const Quaternion &other);
+  bool operator==(const Quaternion &other) const;
   static Quaternion ZERO;
   static Quaternion I;
   static Quaternion J;
   static Quaternion K;
-  friend ostream& operator<<(ostream& o, Quaternion q);
+  friend ostream &operator<<(ostream &o, Quaternion q);
 };

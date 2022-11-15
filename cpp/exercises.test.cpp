@@ -79,17 +79,17 @@ int main()
   array<double, 4> arbitrary_coefficients = {2.0, 1.5, 10.0, -8.0};
   assert(Quaternion(2, 1.5, 10, -8).coefficients() == arbitrary_coefficients);
   ostringstream stream;
-  // stream << Quaternion::ZERO;
-  // assert(stream.str() == "0+0i+0j+0k");
-  // stream = ostringstream();
-  // stream << Quaternion(0, -1, 0, 2.25);
-  // assert(stream.str() == "0-1i+0j+2.25k");
-  // stream = ostringstream();
-  // stream << Quaternion::ZERO - Quaternion::K;
-  // assert(stream.str() == "0+0i+0j-1k");
-  // stream = ostringstream();
-  // stream << Quaternion(-20, -1.75, 13, -2.25);
-  // assert(stream.str() == "-20-1.75i+13j-2.25k");
+  stream << Quaternion::ZERO;
+  assert(stream.str() == "0+0i+0j+0k");
+  stream = ostringstream();
+  stream << Quaternion(0, -1, 0, 2.25);
+  assert(stream.str() == "0-1i+0j+2.25k");
+  stream = ostringstream();
+  stream << Quaternion::ZERO - Quaternion::K;
+  assert(stream.str() == "0+0i+0j-1k");
+  stream = ostringstream();
+  stream << Quaternion(-20, -1.75, 13, -2.25);
+  assert(stream.str() == "-20-1.75i+13j-2.25k");
 
   cout << "All tests passed\n";
 }

@@ -1,6 +1,7 @@
 #include "exercises.h"
 #include <vector>
 #include <array>
+#include <iostream>
 
 // copied from class notes
 // vector<pair<string, int>> sorted_word_counts(list<string> words)
@@ -68,4 +69,16 @@ array<double, 4> Quaternion::coefficients()
 bool Quaternion::operator==(const Quaternion &other) const
 {
     return a == other.a && b == other.b && c == other.c && d == other.d;
+}
+
+ostream &operator<<(ostream &o, Quaternion q)
+{
+    // os << dt.mo << '/' << dt.da << '/' << dt.yr;
+    string signB = q.b >= 0.0 ? "+" : "";
+    string signC = q.c >= 0.0 ? "+" : "";
+    string signD = q.d >= 0.0 ? "+" : "";
+    string toString = to_string(q.a) + signB + to_string(q.b) + 'i' + signC + to_string(q.c) + 'j' + signD + to_string(q.d) + 'k';
+    // cout << toString;
+    o << q.a << signB << q.b << 'i' << signC << q.c << 'j' << signD << q.d << 'k';
+    return o;
 }
