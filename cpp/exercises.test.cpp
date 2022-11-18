@@ -4,12 +4,12 @@
 
 int main()
 {
-  // valarray<double> a = {3, 3, 1};
-  // valarray<double> b = {8, 3, -2};
-  // valarray<double> c = {1, -1, 10, 3};
-  // assert(dot(a, b) == 31);
-  // assert(dot(a, c) == 10);
-  // assert(dot(b, b) == 77);
+  valarray<double> a = {3, 3, 1};
+  valarray<double> b = {8, 3, -2};
+  valarray<double> c = {1, -1, 10, 3};
+  assert(dot(a, b) == 31);
+  assert(dot(a, c) == 10);
+  assert(dot(b, b) == 77);
 
   // assert(stretched_positives(vector<int>()) == vector<int>());
   // assert(stretched_positives(vector {0, 0, 0}) == vector<int>());

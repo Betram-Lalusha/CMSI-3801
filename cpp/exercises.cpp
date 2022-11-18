@@ -1,6 +1,7 @@
 #include "exercises.h"
 #include <vector>
 #include <array>
+#include <valarray>
 #include <iostream>
 
 // copied from class notes
@@ -17,6 +18,11 @@
 //   sort(pairs.begin(), pairs.end(), value_descending);
 //   return pairs;
 // }
+
+double dot(valarray<double> a, valarray<double> b)
+{
+    return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]);
+}
 
 Quaternion::Quaternion(double a, double b, double c, double d)
     : a(a), b(b), c(c), d(d)
