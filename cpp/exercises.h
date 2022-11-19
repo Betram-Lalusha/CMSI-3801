@@ -2,6 +2,8 @@
 #include <list>
 #include <string>
 #include <vector>
+#include <memory>
+#include <functional>
 #include <array>
 #include <valarray>
 #include <iostream>

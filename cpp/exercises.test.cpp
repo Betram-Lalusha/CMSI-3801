@@ -51,13 +51,13 @@ int main()
   // assert(greet("nice")("person")() == "Hello there nice person");
   // assert(greet("C++")() == "Hello there C++");
 
-  // vector<pair<list<string>, vector<pair<string, int>>>> fixture = {
-  //   {{}, {}},
-  //   {{"one"}, {{"one", 1}}},
-  //   {{"a", "b", "b", "b"}, {{"b", 3}, {"a", 1}}}};
-  // for (auto [words, counts] : fixture) {
-  //   assert(sorted_word_counts(words) == counts);
-  // }
+  vector<pair<list<string>, vector<pair<string, int>>>> fixture = {
+    {{}, {}},
+    {{"one"}, {{"one", 1}}},
+    {{"a", "b", "b", "b"}, {{"b", 3}, {"a", 1}}}};
+  for (auto [words, counts] : fixture) {
+    assert(sorted_word_counts(words) == counts);
+  }
 
   Quaternion q(3.5, 2.25, -100, -1.25);
   assert(q.a == 3.5);
