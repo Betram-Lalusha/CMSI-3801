@@ -23,10 +23,10 @@ vector<pair<string, int>> sorted_word_counts(list<string> words)
 
 vector<int> stretched_nonzeros(vector<int> v) {
     auto stretched = vector<int>();
-    int i = 1;
-    for (auto& n : v | views::filter([](const auto& n) { return n > 0; })) {
-        stretched.insert(stretched.end(), i, n);
-        i++;
+    int index = 1;
+    for (int value : v | views::filter([](int n) { return n > 0; })) {
+        stretched.insert(stretched.end(), index, value);
+        index++;
     }
     return stretched;
 }
