@@ -19,7 +19,7 @@ vector<pair<string, int>> sorted_word_counts(list<string> words)
   return pairs;
 }
 
-
+Sayer say;
 string Sayer::operator()()
 {
     return words;
