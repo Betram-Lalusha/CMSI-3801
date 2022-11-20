@@ -43,13 +43,13 @@ int main()
   // } catch (logic_error e) {
   //   assert(true);
   // }
-
-  // assert(say("A")() == "A");
-  // assert(say("A")("B")() == "A B");
-  // assert(say("🐤🦇")("$🦊👏🏽")("!")() == "🐤🦇 $🦊👏🏽 !");
-  // auto greet = say("Hello")("there");
-  // assert(greet("nice")("person")() == "Hello there nice person");
-  // assert(greet("C++")() == "Hello there C++");
+  Sayer say;
+  assert(say("A")() == "A");
+  assert(say("A")("B")() == "A B");
+  assert(say("🐤🦇")("$🦊👏🏽")("!")() == "🐤🦇 $🦊👏🏽 !");
+  auto greet = say("Hello")("there");
+  assert(greet("nice")("person")() == "Hello there nice person");
+  assert(greet("C++")() == "Hello there C++");
 
   vector<pair<list<string>, vector<pair<string, int>>>> fixture = {
     {{}, {}},

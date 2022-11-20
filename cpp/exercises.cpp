@@ -19,6 +19,21 @@ vector<pair<string, int>> sorted_word_counts(list<string> words)
   return pairs;
 }
 
+
+string Sayer::operator()()
+{
+    return words;
+};
+Sayer Sayer::operator()(string word)
+{
+    if (words != "") {
+        return {words+" "+word};
+    } else {
+        return {word};
+    }
+};
+
+
 double dot(valarray<double> a, valarray<double> b)
 {
     return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]);
