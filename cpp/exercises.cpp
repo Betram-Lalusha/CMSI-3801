@@ -4,6 +4,8 @@
 #include <valarray>
 #include <iostream>
 #include <map>
+#include <algorithm>
+#include <ranges>
 
 vector<pair<string, int>> sorted_word_counts(list<string> words)
 {
@@ -19,6 +21,48 @@ vector<pair<string, int>> sorted_word_counts(list<string> words)
   return pairs;
 }
 
+vector<int> stretched_nonzeros(vector<int> v) {
+    auto stretched = vector<int>();
+    int i = 1;
+    for (auto& n : v | views::filter([](const auto& n) { return n > 0; })) {
+        stretched.insert(stretched.end(), i, n);
+        i++;
+    }
+    return stretched;
+}
+
+void powers(int base, int limit, function<void(int)> consumer) {
+    int power = 1;
+    for (int exp = 1; power <= limit; exp++) {
+        consumer(power);
+        power = (int)pow(base, exp);
+    }
+}
+
+int IntStack::size() {
+    shared_ptr<Node> node = top;
+    int count = 0;
+    while (node) {
+        count++;
+        node = node->next;
+    }
+    return count;
+}
+
+void IntStack::push(int item) {
+    auto add = shared_ptr<Node>(new Node{ item, top });
+    top = add;
+}
+
+int IntStack::pop() {
+    if (!top) {
+        throw logic_error("Cannot pop an empty stack.");
+    }
+    int item = top->value;
+    top = top->next;
+    return item;
+}
+
 Sayer say;
 string Sayer::operator()()
 {
@@ -32,7 +76,6 @@ Sayer Sayer::operator()(string word)
         return {word};
     }
 };
-
 
 double dot(valarray<double> a, valarray<double> b)
 {

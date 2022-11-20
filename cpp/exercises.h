@@ -12,7 +12,7 @@ using namespace std;
 
 double dot(valarray<double> a, valarray<double> b);
 
-vector<int> stretched_positives(vector<int> v);
+vector<int> stretched_nonzeros(vector<int> v);
 
 void powers(int base, int limit, function<void(int)> consumer);
 
