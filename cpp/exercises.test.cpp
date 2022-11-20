@@ -43,7 +43,6 @@ int main()
   // } catch (logic_error e) {
   //   assert(true);
   // }
-  Sayer say;
   assert(say("A")() == "A");
   assert(say("A")("B")() == "A B");
   assert(say("🐤🦇")("$🦊👏🏽")("!")() == "🐤🦇 $🦊👏🏽 !");
